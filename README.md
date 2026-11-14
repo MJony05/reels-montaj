@@ -14,6 +14,8 @@ Claude Code ichida:
 /plugin install reels-montaj@reels-montaj
 ```
 
+> **Git yo'q yoki GitHub kerak emas bo'lsa** (masalan yangi Mac): zip'ni oching va [INSTALL-MAC.md](INSTALL-MAC.md) dagi oddiy yo'ldan foydalaning.
+
 Keyin kerakli dasturlarni o'rnatish (Claude o'zi tekshiradi, **avval sizdan ruxsat so'raydi**):
 
 ```

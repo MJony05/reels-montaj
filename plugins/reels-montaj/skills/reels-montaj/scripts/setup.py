@@ -66,10 +66,19 @@ def install_ffmpeg():
     if not C.find_tool("ffmpeg"): print("[ogohlantirish] ffmpeg o'rnatildi, lekin yangi terminal ochish kerak bo'lishi mumkin (PATH yangilanishi uchun).")
 
 
+def pick_python():
+    """Python 3.10+ kerak. Yangi Mac'dagi tizim Python'i eski (3.9) bo'lishi mumkin."""
+    if sys.version_info >= (3, 10): return sys.executable
+    for n in ("python3.13", "python3.12", "python3.11", "python3.10"):
+        p = shutil.which(n)
+        if p: return p
+    sys.exit("[to'xtadi] Python 3.10+ kerak (hozir %s). Mac: `brew install python@3.12`, keyin `python3.12 setup.py --install`" % sys.version.split()[0])
+
+
 def install_python_env(mlx):
     venv = os.path.join(C.HOME, "venv")
     if not os.path.exists(venv):
-        print("-> alohida Python muhiti:", venv); subprocess.run([sys.executable, "-m", "venv", venv], check=True)
+        print("-> alohida Python muhiti:", venv); subprocess.run([pick_python(), "-m", "venv", venv], check=True)
     py = C.venv_python(); pk = PKGS + (MLX if mlx else [])
     print("-> paketlar:", " ".join(pk))
     subprocess.run([py, "-m", "pip", "install", "--no-cache-dir", "-q", "--upgrade", "pip"], check=False)
