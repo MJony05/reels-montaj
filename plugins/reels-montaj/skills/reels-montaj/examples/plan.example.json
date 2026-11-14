@@ -1,0 +1,37 @@
+{
+  "source": "video.mov",
+  "duration": 16.0,
+  "fps": 30,
+  "palette": {
+    "accent_dark": "#5aaeff",
+    "accent_light": "#1f4de0",
+    "hook_color": "#8cc8ff",
+    "ink": "#14122b",
+    "bg_light": "#f4f2ec",
+    "ui": "#ff8a1f",
+    "ui2": "#ff6a00"
+  },
+  "anchor": [540, 600],
+  "shots": [[0, 1.00], [1.8, 1.18], [4.0, 1.28], [11.0, 1.00], [13.2, 1.16]],
+  "card": { "x": 90, "y": 140, "w": 900, "h": 570, "r": 52, "face": [540, 650, 964] },
+  "scenes": [
+    { "id": "steps", "s": 4.60, "e": 9.80 }
+  ],
+  "hook": { "frames": 54 },
+  "phrases": [
+    { "s": 0.00, "e": 1.80, "back": 1, "l": [["~Namuna sarlavha@0.05"], ["*$100@0.20"]] },
+    { "s": 0.00, "e": 1.74, "l": [["Salom,@0.00"], ["bu@0.90", "*namuna@1.10"]] },
+    { "s": 1.82, "e": 4.02, "l": [["~Birinchi@1.82", "*muhim@2.00"], ["fikr@3.00", "shu yerda@3.24"]] },
+    { "s": 4.64, "e": 6.80, "cap": 1, "lt": 1, "l": [["birinchi *qadam@4.64"]] },
+    { "s": 6.84, "e": 8.40, "cap": 1, "lt": 1, "l": [["keyin ikkinchi *qadam@6.84"]] },
+    { "s": 8.44, "e": 9.80, "cap": 1, "lt": 1, "l": [["va *natija@8.44"]] },
+    { "s": 10.00, "e": 13.00, "l": [["~Xulosa@10.00"], ["*eng muhimi@11.00"]] },
+    { "s": 13.20, "e": 16.00, "hold": 1, "l": [["~Rahmat@13.20"], ["*ko'rganingiz uchun@14.00"]] }
+  ],
+  "sfx": {
+    "whoosh_scenes": true,
+    "booms": [0.20],
+    "pops": [4.64, 6.84, 8.44],
+    "ticks": []
+  }
+}

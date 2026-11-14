@@ -1,0 +1,28 @@
+<!-- scenes.html — VIDEOGA MOS UI-SAHNALAR (har video uchun yangidan yoziladi). Bu fayl plan.json dagi sahna oynalarini to'ldiradi.
+     Qoida: 1) har bir obyekt class="ui" (yoki "dot") bo'lsin  2) pozitsiyalar 1080x1920 kanvasda; karta tepada (y 140..710) turadi, UI y 780..1500 oralig'ida,
+     subtitr pastda (y~1560+) 3) window.sceneFrame(t, h) har kadrda chaqiriladi: h.pop(el, t, boshlanish, {dx,dy,rot,s0,d}), h.fadeOut(el, t, boshlanish, davomiylik),
+     h.clamp, h.ioCub, h.oExp, h.$ 4) UI'ning HAR elementi gapdagi ma'noni ko'rsatsin (rasm = so'z). -->
+<style>
+.tile{top:800px;width:270px;height:540px;border-radius:48px;background:#fff;box-shadow:0 24px 60px rgba(20,18,43,.22);overflow:hidden;text-align:center}
+.tile .hd{height:110px;background:var(--ink);color:#fff;font:700 42px/110px 'Inter Tight',sans-serif;letter-spacing:.04em}
+.tile .bd{padding-top:70px}
+.tile .tick{width:130px;height:130px;margin:0 auto;border-radius:50%;background:#e9f9ee;border:5px solid #22b45a;position:relative}
+.tile .tick:after{content:'';position:absolute;left:41px;top:22px;width:26px;height:56px;border:solid #22b45a;border-width:0 11px 11px 0;transform:rotate(45deg)}
+.tile .lb{font:700 44px 'Inter Tight',sans-serif;color:var(--ink);margin-top:40px}
+.tile.hot{background:linear-gradient(160deg,var(--ui),var(--ui2))}
+.tile.hot .hd{background:#fff;color:var(--ui2)} .tile.hot .lb{color:#2a1200}
+.tile.hot .tick{background:#fff;border-color:#fff} .tile.hot .tick:after{border-color:var(--ui2)}
+</style>
+<div class="ui tile" id="e_t1" style="left:90px"><div class="hd">1-QADAM</div><div class="bd"><div class="tick"></div><div class="lb">Boshlash</div></div></div>
+<div class="ui tile" id="e_t2" style="left:405px"><div class="hd">2-QADAM</div><div class="bd"><div class="tick"></div><div class="lb">Davom</div></div></div>
+<div class="ui tile hot" id="e_t3" style="left:720px"><div class="hd">NATIJA</div><div class="bd"><div class="tick"></div><div class="lb">Tayyor</div></div></div>
+<script>
+// har kadrda: so'z aytilgan paytga qarab obyektlar chiqadi. Vaqtlar plan.json dagi so'z vaqtlari bilan bir xil bo'lsin.
+window.sceneFrame = function (t, h) {
+  const $ = h.$;
+  h.pop($("e_t1"), t, 4.64, { dy: 100, rot: -4 });
+  h.pop($("e_t2"), t, 6.84, { dy: 100, rot: 3 });
+  h.pop($("e_t3"), t, 8.44, { dy: 100, rot: -3, s0: .5 });
+  if (t > 9.3) for (const id of ["e_t1", "e_t2", "e_t3"]) h.fadeOut($(id), t, 9.3, .35);   // sahnadan chiqishdan oldin so'nadi
+};
+</script>

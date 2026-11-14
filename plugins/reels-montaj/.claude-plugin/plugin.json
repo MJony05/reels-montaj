@@ -1,0 +1,8 @@
+{
+  "name": "reels-montaj",
+  "version": "0.1.0",
+  "description": "Gapiruvchi odam videosini Instagram Reels uchun professional montaj qiladi: nutqni matnga o'tkazish, so'zma-so'z kinetik matn, karta-morph UI-sahnalar, odam orqasida matn, toza ovoz va ozgina SFX, parallel render.",
+  "author": { "name": "MJony05" },
+  "license": "MIT",
+  "keywords": ["video", "reels", "instagram", "montaj", "ffmpeg", "subtitr"]
+}
