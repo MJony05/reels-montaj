@@ -9,7 +9,7 @@
       "name": "reels-montaj",
       "source": "./plugins/reels-montaj",
       "description": "Gapiruvchi odam videosini Instagram uchun professional montaj qiladi (1080x1920): nutqni matnga o'tkazish, kinetik matn, UI-sahnalar, ovoz tozalash, parallel render.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "video"
     }
   ]

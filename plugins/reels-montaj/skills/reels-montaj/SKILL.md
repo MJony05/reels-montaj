@@ -1,6 +1,11 @@
 ---
 name: reels-montaj
-description: Gapiruvchi odam (talking-head) videosini Instagram Reels / TikTok / Shorts uchun professional montaj qiladi (1080x1920, 30 fps): nutqni matnga o'tkazish, so'zma-so'z kinetik matn, odam yumaloq kartaga aylanadigan UI-sahnalar (kalendar, xarita, bildirishnoma, sertifikat...), odam orqasida hook matni, toza ovoz va ozgina SFX, parallel render. Foydalanuvchi video berib "montaj qil", "reels qil", "instagram uchun tayyorla", "subtitr qo'y", edit this reel desa ishlating.
+description: >-
+  Gapiruvchi odam (talking-head) videosini Instagram Reels / TikTok / Shorts uchun professional montaj qiladi
+  (1080x1920, 30 fps): nutqni matnga o'tkazish, so'zma-so'z kinetik matn, odam yumaloq kartaga aylanadigan
+  UI-sahnalar (kalendar, xarita, bildirishnoma, sertifikat...), odam orqasida hook matni, toza ovoz va ozgina
+  SFX, parallel render. Foydalanuvchi video berib "montaj qil", "reels qil", "instagram uchun tayyorla",
+  "subtitr qo'y", edit this reel desa ishlating.
 ---
 
 # Reels montaj
@@ -40,6 +45,7 @@ Qoidalar (to'liq: `references/style-rules.md`):
 8. Musiqani o'zing qo'yma (huquq). Foydalanuvchiga Instagram'dagi litsenziyali musiqani maslahat ber.
 
 ## 4. Render
+- **Avval kalit kadrlarni ko'r**: `PY scripts/preview.py --times 1.0,6.5,12.3,...` (14 ta kadr ~45 s) -> `work/preview.jpg`. UI-sahna va matnni to'liq renderdan OLDIN shu bilan tekshir (to'liq render 6-8 daqiqa).
 - Tez qoralama: `PY scripts/render.py --draft` (past sifat). `work/qc_sheet.jpg` ni och va tekshir. Kerak bo'lsa tuzat.
 - Yakuniy: `PY scripts/render.py` -> `out/final.mp4` (to'liq), `out/final_light.mp4` (telefon uchun). Parallel bo'laklar, ~5-10 daqiqa (kompyuterga qarab).
 - Bitta tuzatish uchun hammasini qayta qilma: faqat o'zgargan qatlamni (matn -> fg kadrlari; faqat compose) qayta chiqar.
@@ -57,6 +63,8 @@ Faylni foydalanuvchiga ber (light birinchi). Oxirida 3-5 qatorda: nima qilding, 
   4. Uzun va noaniq brief (60+ s, hikoya tuzish, bir nechta sahna turi), ya'ni dizayn qarori ko'p bo'lganda.
 - **Haiku**: asosiy ish uchun tavsiya etilmaydi (dizayn va kadrni baholash sifati past bo'ladi); faqat mexanik yordamchi ishlar uchun (fayllarni nomlash, nusxalash).
 - Qoida: avval Sonnet; natija o'rtacha yoki bir muammo 2 marta tuzalmasa — o'sha qadamga Opus; hal bo'lgach yana Sonnet. Opus odatda ko'proq limit sarflaydi.
+
+- **Fon jarayonlarini TEKSHIR**: har fon buyrug'idan 30-40 s keyin log'ni o'qib, u haqiqatan ishlayotganini ko'r (yo'l/escape xatosi birinchi soniyada o'ldirishi mumkin). Faqat "tugadi" belgisini kutadigan sikl qo'yma. Windows'da Python yo'lini `tr '\\' '/'` bilan to'g'rila.
 
 ## Tuzoqlar (batafsil: `references/troubleshooting.md`)
 - Render'da `-shortest` ishlatma (oxirgi kadrlar qirqiladi). Parallel jarayonlarni 5-6 dan oshirma (xotira).

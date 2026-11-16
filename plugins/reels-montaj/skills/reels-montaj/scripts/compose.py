@@ -24,12 +24,25 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("--plan", default="plan.json"); ap.add_argument("--f0", type=int, required=True)
     ap.add_argument("--f1", type=int, required=True); ap.add_argument("--out", required=True); ap.add_argument("--crf", default="16")
     ap.add_argument("--video-only", action="store_true"); o = ap.parse_args()
-    P = C.load_plan(o.plan); FPS = P["fps"]; DUR = P["duration"]; AX, AY = P["anchor"]
+    P = C.load_plan(o.plan); FPS = P["fps"]; DUR = P["duration"]; AX0, AY0 = P["anchor"]; AX, AY = AX0, AY0
     SHOTS = [tuple(s) for s in P["shots"]]; SC = [(s["s"], s["e"]) for s in P["scenes"]]
-    cx_, cy_, cw_, ch_, cr_ = [P["card"][k] for k in ("x", "y", "w", "h", "r")]; FACE = P["card"]["face"]; HOOKN = P["hook"].get("frames", 0)
+    cx_, cy_, cw_, ch_, cr_ = [P["card"][k] for k in ("x", "y", "w", "h", "r")]; FACE0 = P["card"]["face"]; HOOKN = P["hook"].get("frames", 0)
     G = P["grade"]; FADE = P.get("fade_out", 0.4)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     vig = np.clip(1 - G["vignette"] * (((xx - W / 2) / (W / 2)) ** 2 + ((yy - H * 0.42) / (H / 2)) ** 2), 0.6, 1)[..., None]
+
+    def face_at(t):
+        """kartadagi manba oynasi [markaz_x, markaz_y, kenglik]: sahnaning `faces` ([[t, cx, cy, w], ...]) yoki `face` maydoni, aks holda card.face"""
+        for sc in P["scenes"]:
+            if sc["s"] - 0.25 <= t <= sc["e"] + 0.2:
+                fl = sc.get("faces")
+                if fl:
+                    cur = fl[0]
+                    for f in fl:
+                        if f[0] <= t: cur = f
+                    return cur[1:4]
+                if sc.get("face"): return sc["face"]
+        return FACE0
 
     def prog(t):
         for s, e in SC:
@@ -65,7 +78,8 @@ if __name__ == "__main__":
         if len(buf) < FB: break
         n = o.f0 + k_; k_ += 1; t = n / FPS
         fr0 = np.frombuffer(buf, np.uint8).reshape(H, W, 3)
-        i = max(j for j in range(len(SHOTS)) if SHOTS[j][0] <= t); a, bz = SHOTS[i]
+        i = max(j for j in range(len(SHOTS)) if SHOTS[j][0] <= t); a, bz = SHOTS[i][0], SHOTS[i][1]
+        AX, AY = (SHOTS[i][2], SHOTS[i][3]) if len(SHOTS[i]) >= 4 else (AX0, AY0)      # har kadr turi uchun o'z markazi (yuz)
         b = SHOTS[i + 1][0] if i + 1 < len(SHOTS) else DUR
         z = bz + 0.045 * min(1, (t - a) / max(1.0, b - a))                      # sekin yaqinlashish
         if a > 0: z += 0.05 * max(0.0, 1 - (t - a) / 0.22) ** 2                 # kesish 'punch'
@@ -87,6 +101,7 @@ if __name__ == "__main__":
             wx, wy, ww = AX - AX / z + W / (2 * z), AY - AY / z + H / (2 * z), W / z       # to'liq ekrandagi ko'rinadigan oyna markazi/kengligi
             L = lambda u, v: u + (v - u) * p
             rw_, rh_ = L(W, cw_), L(H, ch_); rcx = L(W / 2, cx_ + cw_ / 2); rcy = L(H / 2, cy_ + ch_ / 2) + (np.sin(t * 2.2) * 4 if p > .99 else 0); rad = cr_ * p
+            FACE = face_at(t)
             win_w = L(ww, FACE[2]); win_h = win_w * rh_ / rw_; win_cx = L(wx, FACE[0]); win_cy = L(wy, FACE[1]); sx = rw_ / win_w
             Mt = np.float32([[sx, 0, rcx - rw_ / 2 - (win_cx - win_w / 2) * sx], [0, sx, rcy - rh_ / 2 - (win_cy - win_h / 2) * sx]])
             warped = grade(cv2.warpAffine(fr0, Mt, (W, H), flags=cv2.INTER_CUBIC).astype(np.float32), sx > 1.1)

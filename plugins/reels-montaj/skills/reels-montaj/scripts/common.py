@@ -66,7 +66,7 @@ def load_plan(path="plan.json"):
     plan.setdefault("palette", {})
     plan.setdefault("sfx", {})
     plan.setdefault("text", {"bottom": 330, "cap_bottom": 300, "fit_width": 880})
-    plan["nframes"] = int(round(plan["duration"] * plan["fps"]))
+    plan["nframes"] = int(plan["duration"] * plan["fps"] + 1e-6)          # oxirgi to'liq bo'lmagan kadr tushiriladi (manba kadrlari soniga mos)
     return plan
 
 
