@@ -35,6 +35,9 @@ Claude Code'da videoning papkasida shunday yozing:
 Claude skill'ni o'zi tanlaydi: videoni ko'radi, nutqni matnga o'tkazadi, reja tuzadi (`plan.json`), sahnalarni chizadi (`scenes.html`),
 qoralama chiqaradi, tekshiradi va `out/final.mp4` + `out/final_light.mp4` ni beradi.
 
+## Yangilash
+`python3 ~/.claude/skills/reels-montaj/scripts/update.py` (skill papkadan o'rnatilgan bo'lsa; git kerak emas) yoki `/plugin marketplace update reels-montaj` (plugin sifatida o'rnatilgan bo'lsa).
+
 ## Talablar
 - macOS (Apple Silicon yoki Intel), Windows yoki Linux; ~6 GB bo'sh joy (modellar bilan ~10 GB)
 - Python 3.10+, ffmpeg, Google Chrome (yo'q bo'lsa playwright chromium yuklanadi)

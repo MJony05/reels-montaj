@@ -66,6 +66,9 @@ Faylni foydalanuvchiga ber (light birinchi). Oxirida 3-5 qatorda: nima qilding, 
 
 - **Fon jarayonlarini TEKSHIR**: har fon buyrug'idan 30-40 s keyin log'ni o'qib, u haqiqatan ishlayotganini ko'r (yo'l/escape xatosi birinchi soniyada o'ldirishi mumkin). Faqat "tugadi" belgisini kutadigan sikl qo'yma. Windows'da Python yo'lini `tr '\\' '/'` bilan to'g'rila.
 
+## Yangilash
+Skill papkadan o'rnatilgan bo'lsa (`~/.claude/skills/reels-montaj`): `python3 <skill>/scripts/update.py` — GitHub'dan eng yangisini yuklaydi, eskisini `~/.reels-montaj/backup/` ga saqlaydi (git kerak emas). `--check` faqat versiyani solishtiradi. Plugin orqali o'rnatilgan bo'lsa: `/plugin marketplace update reels-montaj`.
+
 ## Tuzoqlar (batafsil: `references/troubleshooting.md`)
 - Render'da `-shortest` ishlatma (oxirgi kadrlar qirqiladi). Parallel jarayonlarni 5-6 dan oshirma (xotira).
 - faster-whisper `av` xatosi bersa audio'ni numpy massiv sifatida bering (transcribe.py shunday qiladi).
